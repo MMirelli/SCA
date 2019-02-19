@@ -17,6 +17,22 @@ function plot_denoised_signal(WNAME, LEV, THR_i, THR_METH_i, RESC_i)
 
     load 'data.mat';
     
+    if(isstring(THR_i))
+        THR_i = str2num(THR_i);
+    end
+    
+    if(isstring(THR_METH_i))
+        THR_METH_i = str2num(THR_METH_i);
+    end
+    
+    if(isstring(RESC_i))
+        RESC_i = str2num(RESC_i);
+    end
+    
+    if(isstring(LEV))
+        LEV = str2num(LEV);
+    end
+    
     dt = wden(nt, TPTR_TYPES(THR_i), SORH(THR_METH_i), SCAL(RESC_i), LEV, WNAME);
     
     subplot(3,1,1); plot([t]); title('Original Signal');

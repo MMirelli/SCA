@@ -35,18 +35,15 @@ To interpret it run:
 
 ```
 load('data.mat')
-fprint('The best params are: \nWavelet: %s;\nlevel: %i\nthreshold: %s\n...'
-	'threshold method: %s\nrescaling: %s',...
-	output(1), output(2), TPTR_TYPES(output(3)),...
-	SORH(output(4)),SCAL(output(5));
+
+fprintf('The best params are: \nWavelet: %s;\nlevel: %s;\nthreshold: %s;\nthreshold method: %s;\nrescaling: %s.\n',...
+	output(1), output(2), TPTR_TYPES(str2num(output(3))),...
+	SORH(str2num(output(4))),SCAL(str2num(output(5))));
 ```
 In order to plot the de-noised signal using ```wden``` with the computed parameters:
 
-TODO: check
 ```
-plot_denoised_signal(output); 
-plot_denoised_signal(output(1:end));
-plot_denoised_signal(output(1), ..., output(5)); 
+plot_denoised_signal(output(1), output(2), output(3), output(4), output(5));
 ```
 
 To plot the 3d plot use
