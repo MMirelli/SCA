@@ -1,6 +1,8 @@
-function plot_denoised_signal(WNAME, LEV, THR_i, THR_METH_i, RESC_i)
-   
-% plot_denoised_signal(WNAME, LEV, THR_i, THR_METH_i, RESC_i)
+function plot_denoised_signal(input)
+%    
+% plot_denoised_signal(input)
+%  input - string array 
+%               ["WNAME", "LEV", "THR_i", "THR_METH_i", "RESC_i"]
 % 
 %   WNAME      - name of the wavelet used for denoising
 %   LEV        - DWT level 
@@ -17,29 +19,22 @@ function plot_denoised_signal(WNAME, LEV, THR_i, THR_METH_i, RESC_i)
 
     load 'data.mat';
     
-    if(isstring(THR_i))
-        THR_i = str2num(THR_i);
+    if ~isstring(input) || length(input) ~= 5
+        perror('Input type not correct: please pass a string array ',...
+            'with this format: ["WNAME", "LEV", "THR_i", "THR_METH_i", "RESC_i"]');
     end
     
-    if(isstring(THR_METH_i))
-        THR_METH_i = str2num(THR_METH_i);
-    end
+    num_input = arrayfun(@(x) str2num(x), (input(2:end)));
     
-    if(isstring(RESC_i))
-        RESC_i = str2num(RESC_i);
-    end
-    
-    if(isstring(LEV))
-        LEV = str2num(LEV);
-    end
-    
-    dt = wden(nt, TPTR_TYPES(THR_i), SORH(THR_METH_i), SCAL(RESC_i), LEV, WNAME);
+%   dt = wden(nt, TPTR_TYPES(THR_i), SORH(THR_METH_i), SCAL(RESC_i), LEV, WNAME);
+    dt = wden(nt, TPTR_TYPES(num_input(2)), SORH(num_input(3)), ...
+        SCAL(num_input(4)), num_input(1), input(1));
     
     subplot(3,1,1); plot([t]); title('Original Signal');
     xlabel('Time (s)'); ylabel('Power (V)');
     
     subplot(3,1,2); plot([dt]); title( sprintf('%s Denoised Signal',...
-        WNAME));
+        input(1)));
     xlabel('Time (s)'); ylabel('Power (V)');
     
     subplot(3,1,3); h1 = plot([nt t dt]);
@@ -48,7 +43,7 @@ function plot_denoised_signal(WNAME, LEV, THR_i, THR_METH_i, RESC_i)
     h1(2).LineWidth = 2;
     h1(3).LineWidth = 2;
     legend('Noised Signal', 'Original Signal', sprintf('%s Denoised Signal', ...
-        WNAME))
+        input(1)))
     title('Original, noised and denoised signals');
 
 end
