@@ -27,10 +27,10 @@ function output = get_the_best_van_moment(W_FAMILY)
             van_moms = [4,6,8,14,18,22];
         case 'bior' 
             van_moms = [1.1, 1.3, 1.5, 2.2, 2.4, 2.6, 2.8, 3.1, 3.3, 3.5, ...
-                3.7, 3.9, 4.4, 5.5, 6.8];
+                 3.7, 3.9, 4.4, 5.5, 6.8];
         case 'rbio'
             van_moms = [1.1, 1.3, 1.5, 2.2, 2.4, 2.6, 2.8, 3.1, 3.3, 3.5, ...
-                3.7, 3.9, 4.4, 5.5, 6.8];
+                 3.7, 3.9, 4.4, 5.5, 6.8];
         otherwise
             perror('Unknown wavelet');
     end
@@ -39,7 +39,8 @@ function output = get_the_best_van_moment(W_FAMILY)
     params = zeros(length(van_moms), 5);
     
     for i = 1 : length(van_moms)
-        
+       fprintf('Best params for wavelet %s have been processed.\n', ... 
+            strcat(W_FAMILY, num2str(van_moms(i))));
        % each row represents the best DWT parameters per vanishing moment
        params(i,:) = get_best_dwt_params_for_wavelet(strcat(W_FAMILY,... 
             num2str(van_moms(i))));
