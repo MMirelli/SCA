@@ -1,21 +1,23 @@
-function ax =  plot_by_level_and_threshold(W_NAME, T_M_I, S_I)
+function ax =  plot_by_level_and_threshold(input)
 
-% ax = plot_by_level_and_threshold (W_NAME, THR_METH, SCAL)
-% 
+% ax = plot_by_level_and_threshold (input)
+% input - string array
+%           ["W_NAME", "THR_METH_i", "RESC_i"]
 % Input:
-%   W_NAME - name of the wavelet we want to plot the MAE with respect to the
-%            initial denoised signal. This must be the full wavelet name:
-%                       wavelet_family.N, 
-%           with N number of vanishing moments, if necessary;
+%   W_NAME    -  name of the wavelet we want to plot the MAE with respect 
+%                to the initial denoised signal. This must be the full 
+%                wavelet name:             
+%                           wavelet_family.N, 
+%                with N number of vanishing moments, if necessary;
 %   
-%   T_M_I  - index of thresholding method employed in DWT, fixed parameter 
-%            among the following:
+%   THR_METH_i - index of thresholding method employed in DWT, fixed 
+%                parameter among the following:
 %                           ["s","h"];
-%   S_I    - index of rescaling method employed in DWT, fixed parameter among
-%            the following:
+%   RESC_i     - index of rescaling method employed in DWT, fixed 
+%                parameter among the following:
 %                           ["sln", "mln","one"].
 % Ouput:
-%   ax     - axes of the plot.
+%   ax         - axes of the plot.
 % 
 % It plots the MAE of the DWT reconstruction (dt) of the noised signal (nt)
 % having as variables the type of thresholding(["rigrsure","heursure",
@@ -25,14 +27,13 @@ function ax =  plot_by_level_and_threshold(W_NAME, T_M_I, S_I)
 
     load data.mat;
     
-    if(isstring(T_M_I))
-       T_M_I = str2num(T_M_I) ;
+    if ~isstring(input) || length(input) ~= 3
+        perror('Input type not correct: please pass a string array ',...
+            'with this format: ["W_NAME", "THR_METH_i", "RESC_i"]');
     end
     
-    if(isstring(S_I))
-        S_I = str2num(S_I);  
-    end
-    
+    num_input = arrayfun(@(x) str2num(x), (input(2:end)));
+            
     MAX_L = floor(log2(length(t(:,1)))); % Max level
     THR_NUMBER = 4;
     Z = zeros(MAX_L, THR_NUMBER);
@@ -40,8 +41,8 @@ function ax =  plot_by_level_and_threshold(W_NAME, T_M_I, S_I)
     % get the MAE per level
     for l = 1 : MAX_L
         for thr_i = 1 : THR_NUMBER
-            dt = wden(nt, TPTR_TYPES(thr_i), SORH(T_M_I), SCAL(S_I), l, ...
-                    W_NAME);
+            dt = wden(nt, TPTR_TYPES(thr_i), SORH(num_input(1)),...
+                SCAL(num_input(2)), l, input(1));
             
             Z(l, thr_i) = sum(abs(t-dt))/length(t);
         end

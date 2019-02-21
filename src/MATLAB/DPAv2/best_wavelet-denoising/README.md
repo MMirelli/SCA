@@ -15,15 +15,17 @@ If you have run the previous command and want to test, the original case shown i
 ``` 
 clear
 load('backup.mat')
+save('output.mat', 'output')
+clear output
 save('data.mat')
-save('best_DWT_param.mat', 'best'); 
+clear
 ```
 ---
 
-To get the best DWT parameters to de-noise the initial signal run 
+To get the best DWT parameters to de-noise the initial signal run, it will take a long time to process it
 
 ```
-get_the_best_dwt_params()
+output = get_the_best_dwt_params();
 ``` 
 This will be the output
 
@@ -36,18 +38,21 @@ To interpret it run:
 ```
 load('data.mat')
 
-fprintf('The best params are: \nWavelet: %s;\nlevel: %s;\nthreshold: %s;\nthreshold method: %s;\nrescaling: %s.\n',...
-	output(1), output(2), TPTR_TYPES(str2num(output(3))),...
-	SORH(str2num(output(4))),SCAL(str2num(output(5))));
+num_output = arrayfun(@(x) str2num(x), (output(3:end)));
+
+fprintf('\nThe best params are: \nWavelet: %s;\nlevel: %s;\nthreshold: %s;\nthreshold method: %s;\nrescaling: %s.\n\n',...
+	output(1:2), TPTR_TYPES(num_output(1)),...
+	SORH(num_output(2)),SCAL(num_output(3)));
 ```
 In order to plot the de-noised signal using ```wden``` with the computed parameters:
 
 ```
-plot_denoised_signal(output(1), output(2), output(3), output(4), output(5));
+plot_denoised_signal(output);
 ```
 
 To plot the 3d plot use
 
 ```
-plot_by_level_and_threshold(output(1), output(4), output(5));
+output2 = [output(1), output(4:5)];
+plot_by_level_and_threshold(output2);
 ```
