@@ -1,1 +1,0 @@
-Download [DPAv2 traces](http://www.dpacontest.org/v2/download.php) and insert them here.

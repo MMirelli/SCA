@@ -1,1 +1,0 @@
-This dir is meant to collect all raw traces.
