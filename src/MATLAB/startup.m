@@ -3,9 +3,9 @@
 %   > path_to_local_folder = 'your_path_to_SCA'
 %   > save .path_to_SCA.mat
 
-file_s = strcat(pwd, filesep, '.path_to_SCA.mat');
-load(file_s)
-my_dir = strcat(path_to_local_folder,'in_progress/src/MATLAB/');
+file_mat = strcat(pwd, filesep, '.path_to_SCA.mat');
+load(file_mat)
+my_dir = strcat(path_to_local_folder,'src/MATLAB/');
 cd(my_dir)
 
 files = dir;
