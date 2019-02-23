@@ -1,7 +1,7 @@
 % To set the path to your folder follow the steps
-%   > pwd
-%   > path_to_local_folder = 'your_path_to_SCA'
-%   > save .path_to_SCA.mat
+%   >> pwd
+%   >> path_to_local_folder = 'your_path_to_SCA'
+%   >> save .path_to_SCA.mat
 
 file_mat = strcat(pwd, filesep, '.path_to_SCA.mat');
 load(file_mat)
