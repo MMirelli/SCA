@@ -1,11 +1,32 @@
-function print_video_cwt(traces_number, fps, traces_path, figs_path) 
+function print_video_cwt(traces_number, fps, traces_path) 
 % [] = print_video_cwt
+% 
+% Input:
+%     traces_number - int [1, n] where n < total number of traces in
+%                     traces_path;
+%     fps           - frame per second; the output video(/s) will show
+%                     traces according to this parameter. It is recommended
+%                     that this is not greater than 30;
+%     traces_path   - path to the dir where csv-formatted traces are saved.
+%                     The path must follow the project structure according
+%                     to the template below:
+%                         '../../data/processed/DPAv<n>/<db>/part<m>
+%                     where n is the DPA contest version (2 or 4.2)
+%                           db is the database name if necessary (in DPAv2,
+%                              public_db or template_db)
+%                           m is the part number (for DPAv2/public_db m is
+%                             in [0,3].
+%                         '../../data/processed/DPAv2/public_db/part0/'
+%
+% This generates one or more videos (if traces_number > 1000) in the
+% directory
+% ../../data/figs/DPA<n>/<db>/part<m>(/<traces_number>_traces_cwt-<fps>_fps/).
 % 
 % NOTE: With more than 1000 traces you will need 7.5GB of RAM to run this.
 % 
-% How to:
-% >> load useful_paths.mat
-% >> print_video_cwt(3000, 25, traces_path, figs_path)
+% Run example
+% >> load sample_path.mat
+% >> print_video_cwt(3000, 25, input)
 % 
 % Run it from folder ./src/MATLAB
 % 
@@ -16,7 +37,10 @@ function print_video_cwt(traces_number, fps, traces_path, figs_path)
     FS = filesep;
     UPDIR = strcat('..', FS);
     DATA_PATH = strcat(UPDIR, UPDIR, 'data', FS);
+    % gets the path where to save output videos   
+    figs_path = replace(traces_path, 'processed', 'figs');
     
+    % *BOLD TEXT*
     % 3GB are taken by 1000 frames
     CHUNKS_LENGTH = 1000;
     new_dir_path='';
