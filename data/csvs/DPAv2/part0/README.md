@@ -1,1 +1,0 @@
-The traces processed by multi_traces_converter-py2.py will be saved here.

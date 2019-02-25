@@ -18,11 +18,11 @@ function output = get_the_best_van_moment(W_FAMILY)
 % 
     switch W_FAMILY % selecting the vanishing moments
         case 'db'          
-            van_moms = [1:45];
+            van_moms = 1:45;
         case 'sym'
-            van_moms = [2:27]; % [2:45], do it till 45 if possible
+            van_moms = 2:27; % [2:45], do it till 45 if possible
         case 'coif'
-            van_moms = [1:5];
+            van_moms = 1:5;
         case 'fk'
             van_moms = [4,6,8,14,18,22];
         case 'bior' 
