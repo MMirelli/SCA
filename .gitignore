@@ -1,9 +1,10 @@
 src/MATLAB/pathdef.m
-src/MATLAB/startup.m
 attack_by_CPA
 
 *#*
 *~
+
+emacs*
 
 data/figs/DPAv2/public_db/*
 data/figs/DPAv2/template_db/*
