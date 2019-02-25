@@ -1,18 +1,16 @@
 import os
 import csv
 
-""" This script "trims" all raw traces in /data/raw/DPAv2/public_db/part0
+""" This script "trims" all raw traces in /data/raw/DPAv2/public_db
 
 
 It deletes the DPAv2 traces header (lines starting by #), and it saves 
-the result in /data/processed/DPAv2/public_db/part0. 
+the result in /data/processed/DPAv2/public_db. 
 
 This script is already multiplatform compatible; tested with the following
 OSs:
 	* Windows 10
 
---------
-TODO: test it on Linux
 --------
 TODO: make a function out of it!
 --------
@@ -25,10 +23,10 @@ home_path = up_dir * 3
 data_path = home_path + "data" + sepr
 
 raw_traces_path = (data_path + "raw" + sepr + "DPAv2" +
-                   sepr + "public_db"  + sepr + "part0"  + sepr)
+                   sepr + "public_db"  + sepr)
 
 processed_traces_path = (data_path + "processed"  + sepr + "DPAv2" +
-                         sepr + "public_db" + sepr + "part0"  + sepr)
+                         sepr + "public_db" + sepr)
 
 i = 0
 
