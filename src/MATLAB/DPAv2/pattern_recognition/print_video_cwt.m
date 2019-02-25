@@ -10,17 +10,15 @@ function print_video_cwt(traces_number, fps, traces_path)
 %     traces_path   - path to the dir where csv-formatted traces are saved.
 %                     The path must follow the project structure according
 %                     to the template below:
-%                         '../../data/processed/DPAv<n>/<db>/part<m>
+%                         '../../data/processed/DPAv<n>/<db>
 %                     where n is the DPA contest version (2 or 4.2)
 %                           db is the database name if necessary (in DPAv2,
 %                              public_db or template_db)
-%                           m is the part number (for DPAv2/public_db m is
-%                             in [0,3].
-%                         '../../data/processed/DPAv2/public_db/part0/'
+%                         '../../data/processed/DPAv2/public_db/'
 %
 % This generates one or more videos (if traces_number > 1000) in the
 % directory
-% ../../data/figs/DPA<n>/<db>/part<m>(/<traces_number>_traces_cwt-<fps>_fps/).
+% ../../data/figs/DPA<n>/<db>(/<traces_number>_traces_cwt-<fps>_fps/).
 % 
 % NOTE: With more than 1000 traces you will need 7.5GB of RAM to run this.
 % 
@@ -79,6 +77,8 @@ function print_video_cwt(traces_number, fps, traces_path)
         writerObj = VideoWriter(strcat(figs_path, new_dir_path, FS, num2str(traces_number),...
                 '_traces_cwt-', num2str(fps),'_fps-',num2str(j),'.avi')); 
         writerObj.FrameRate = fps;
+
+% TODO set writerObj to write .mp5, not .avi
         open(writerObj);
         % 3GB to write video
         writeVideo(writerObj, F)
