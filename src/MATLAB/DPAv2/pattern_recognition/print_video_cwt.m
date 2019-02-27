@@ -33,8 +33,6 @@ function print_video_cwt(traces_number, fps, traces_path)
 %   * Windows
 
     FS = filesep;
-    UPDIR = strcat('..', FS);
-    DATA_PATH = strcat(UPDIR, UPDIR, 'data', FS);
     
     if traces_path(end) ~= FS, traces_path = strcat(traces_path,FS); end
     % gets the path where to save output videos   
