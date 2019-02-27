@@ -6,7 +6,7 @@
 p=pwd;
 % Checks if the MATLAB environment has been set correctly; if not it sets
 % the path
-if ~strcmp(p(end-9:end), 'src\MATLAB')
+if length(p) < 10 || ~strcmp(p(end-9:end), 'src\MATLAB')
     file_mat = strcat(pwd, filesep, '.path_to_SCA.mat');
     load(file_mat)
     my_dir = strcat(path_to_local_folder,'src', filesep, 'MATLAB', filesep);

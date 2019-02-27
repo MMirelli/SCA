@@ -3,6 +3,10 @@ attack_by_CPA
 
 *#*
 *~
+*.asv
+
+.path_to_SCA.mat
+
 
 emacs*
 
