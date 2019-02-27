@@ -35,6 +35,8 @@ function print_video_cwt(traces_number, fps, traces_path)
     FS = filesep;
     UPDIR = strcat('..', FS);
     DATA_PATH = strcat(UPDIR, UPDIR, 'data', FS);
+    
+    if traces_path(end) ~= FS, traces_path = strcat(traces_path,FS); end
     % gets the path where to save output videos   
     figs_path = replace(traces_path, 'processed', 'figs');
     
@@ -77,8 +79,7 @@ function print_video_cwt(traces_number, fps, traces_path)
         writerObj = VideoWriter(strcat(figs_path, new_dir_path, FS, num2str(traces_number),...
                 '_traces_cwt-', num2str(fps),'_fps-',num2str(j),'.avi')); 
         writerObj.FrameRate = fps;
-
-% TODO set writerObj to write .mp5, not .avi
+% TODO set writerObj to write .mp4, not .avi
         open(writerObj);
         % 3GB to write video
         writeVideo(writerObj, F)
