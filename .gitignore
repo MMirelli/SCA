@@ -18,6 +18,8 @@ data/raw/DPAv2/public_db/*
 !data/raw/DPAv2/public_db/README.md
 data/raw/DPAv2/template_db/*
 
+data/ml/
+103_bit2hex.txt
 
 data/processed/DPAv2/public_db/*
 !data/processed/DPAv2/public_db/README.md
